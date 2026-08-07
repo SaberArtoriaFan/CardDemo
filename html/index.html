@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卡牌对战原型 Demo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Prototype</p>
+        <h1>卡牌对战网页原型</h1>
+      </div>
+      <div class="topbar-meta">
+        <div class="meta-chip">
+          <span>回合</span>
+          <strong id="round-value">1</strong>
+        </div>
+        <div class="meta-chip">
+          <span>阶段</span>
+          <strong id="phase-value">操作中</strong>
+        </div>
+        <button id="restart-button" class="secondary-button" type="button">重新开始</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="battlefield">
+        <div class="status-banner" id="status-banner"></div>
+
+        <article class="side-panel enemy-panel">
+          <div class="side-header">
+            <div>
+              <p class="side-label">敌方</p>
+              <h2>镜像训练机</h2>
+            </div>
+            <div class="stats">
+              <div class="stat-box">
+                <span>生命</span>
+                <strong id="enemy-hp"></strong>
+              </div>
+              <div class="stat-box">
+                <span>能量</span>
+                <strong id="enemy-energy"></strong>
+              </div>
+            </div>
+          </div>
+          <div class="board-grid" id="enemy-board"></div>
+        </article>
+
+        <article class="resolution-panel">
+          <div>
+            <p class="eyebrow">Round Flow</p>
+            <h2>每回合只做一次操作，再整条链结算</h2>
+          </div>
+          <p id="round-summary" class="round-summary"></p>
+          <div class="controls">
+            <button id="resolve-button" class="primary-button" type="button">开始结算</button>
+            <button id="next-round-button" class="secondary-button" type="button">确认进入下一回合</button>
+            <button id="reset-round-button" class="ghost-button" type="button">重置本回合操作</button>
+          </div>
+          <div class="legend">
+            <span><i class="dot charge"></i>充能</span>
+            <span><i class="dot attack"></i>攻击</span>
+            <span><i class="dot defend"></i>防御</span>
+            <span><i class="dot hidden"></i>敌方暗牌</span>
+          </div>
+        </article>
+
+        <article class="side-panel player-panel">
+          <div class="side-header">
+            <div>
+              <p class="side-label">玩家</p>
+              <h2>测试者</h2>
+            </div>
+            <div class="stats">
+              <div class="stat-box">
+                <span>生命</span>
+                <strong id="player-hp"></strong>
+              </div>
+              <div class="stat-box">
+                <span>能量</span>
+                <strong id="player-energy"></strong>
+              </div>
+            </div>
+          </div>
+          <div class="board-grid" id="player-board"></div>
+        </article>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Turn Action</p>
+              <h3>当前回合操作</h3>
+            </div>
+            <div class="selection-prompt" id="selection-prompt"></div>
+          </div>
+          <div class="action-toolbar" id="action-toolbar"></div>
+          <p class="action-hint" id="action-hint"></p>
+          <div class="card-list" id="card-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">DIY Tools</p>
+              <h3>独立工具页</h3>
+            </div>
+          </div>
+          <div class="detail-copy">
+            <p>生命上限、双方角色卡组、自定义卡牌和 JSON 导入导出都放在单独工具页里，主战斗页只保留可玩验证所需的操作区。</p>
+            <p><a class="tool-link secondary-button" href="./tools.html">打开 DIY 工具页</a></p>
+          </div>
+        </section>
+
+        <section class="detail-panel panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Selection</p>
+              <h3>当前选择与规则</h3>
+            </div>
+          </div>
+          <div class="detail-copy" id="detail-copy"></div>
+        </section>
+
+        <section class="log-panel panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Battle Log</p>
+              <h3>结算日志</h3>
+            </div>
+          </div>
+          <ol class="log-list" id="log-list"></ol>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./keywords.js"></script>
+  <script src="./main.js" defer></script>
+</body>
+</html>

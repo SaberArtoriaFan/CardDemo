@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卡牌对战 DIY 工具页</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DIY Tools</p>
+        <h1>卡牌对战原型工具页</h1>
+      </div>
+      <div class="topbar-meta">
+        <a class="secondary-button tool-link" href="./index.html">返回战斗页</a>
+      </div>
+    </header>
+
+    <main class="tools-layout">
+      <section class="panel">
+        <div class="status-banner" id="status-banner">当前页面用于维护对局设置、双方角色卡组与自定义卡牌。</div>
+
+        <section class="subpanel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Battle Setup</p>
+              <h3>对局参数</h3>
+            </div>
+          </div>
+          <div class="form-grid">
+            <label class="field-group">
+              <span>玩家生命上限</span>
+              <input id="player-max-hp-input" type="number" min="1" max="999" step="1">
+            </label>
+            <label class="field-group">
+              <span>敌方生命上限</span>
+              <input id="enemy-max-hp-input" type="number" min="1" max="999" step="1">
+            </label>
+          </div>
+          <div class="panel-actions">
+            <button id="apply-settings-button" class="secondary-button" type="button">应用设置</button>
+          </div>
+        </section>
+
+        <section class="subpanel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Deck Setup</p>
+              <h3>双方角色卡组</h3>
+            </div>
+          </div>
+          <div class="detail-copy" id="deck-summary"></div>
+          <div class="form-grid">
+            <div class="field-group field-span-2">
+              <span>玩家角色卡组</span>
+              <div id="player-deck-editor" class="deck-editor"></div>
+            </div>
+            <div class="field-group field-span-2">
+              <span>敌方角色卡组</span>
+              <div id="enemy-deck-editor" class="deck-editor"></div>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button id="save-decks-button" class="secondary-button" type="button">保存双方卡组</button>
+            <button id="reset-decks-button" class="ghost-button" type="button">重置为默认卡组</button>
+          </div>
+          <p class="tiny-note">玩家卡组决定战斗页中你能看到哪些可选牌。敌方卡组决定 AI 的可用卡池。</p>
+        </section>
+      </section>
+
+      <section class="panel">
+        <section class="subpanel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">DIY Cards</p>
+              <h3>自定义卡牌库</h3>
+            </div>
+          </div>
+          <div class="form-grid">
+            <label class="field-group field-span-2">
+              <span>卡牌名称</span>
+              <input id="custom-card-name-input" type="text" placeholder="例如：蓄势斩">
+            </label>
+            <label class="field-group">
+              <span>类型</span>
+              <select id="custom-card-type-input">
+                <option value="charge">充能</option>
+                <option value="attack">攻击</option>
+                <option value="defend">防御</option>
+              </select>
+            </label>
+            <label class="field-group">
+              <span>能量消耗</span>
+              <input id="custom-card-cost-input" type="number" min="0" max="99" step="1" value="0">
+            </label>
+            <label class="field-group">
+              <span>攻击强度</span>
+              <input id="custom-card-power-input" type="number" min="0" max="99" step="1" value="0">
+            </label>
+                <div class="field-group field-span-2">
+                  <span>词条</span>
+                  <div id="custom-card-keyword-selector" class="keyword-selector"></div>
+                </div>
+                <label class="field-group field-span-2">
+                  <span>描述</span>
+                  <textarea id="custom-card-description-input" rows="3" placeholder="写给原型自己看的说明即可"></textarea>
+            </label>
+          </div>
+          <div class="panel-actions">
+            <button id="add-custom-card-button" class="primary-button" type="button">加入自定义牌库</button>
+            <button id="clear-custom-card-form-button" class="ghost-button" type="button">清空表单</button>
+            <button id="clear-custom-cards-button" class="ghost-button" type="button">清空自定义牌库</button>
+          </div>
+          <div class="detail-copy" id="custom-card-summary"></div>
+        </section>
+
+        <section class="subpanel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">JSON</p>
+              <h3>配置导入导出</h3>
+            </div>
+          </div>
+          <label class="field-group">
+            <span>JSON 数据</span>
+            <textarea id="custom-cards-json" class="json-textarea" rows="12" placeholder="导出的 JSON 会显示在这里，也可以把 JSON 粘贴进来后点击导入"></textarea>
+          </label>
+          <div class="panel-actions">
+            <button id="export-custom-cards-button" class="secondary-button" type="button">生成 JSON</button>
+            <button id="import-custom-cards-button" class="secondary-button" type="button">从 JSON 导入</button>
+            <button id="download-custom-cards-button" class="ghost-button" type="button">下载 JSON 文件</button>
+          </div>
+          <p class="tiny-note">词条现在只能从注册表里勾选。若后续要新增词条，请先更新 <code>keyword-definitions.json</code>、<code>keywords.js</code>，再补上对应效果实现。</p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="./keywords.js"></script>
+  <script src="./tools.js" defer></script>
+</body>
+</html>

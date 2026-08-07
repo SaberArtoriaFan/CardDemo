@@ -1,0 +1,27 @@
+window.BBC_KEYWORD_REGISTRY = [
+  {
+    key: "strong",
+    label: "强势",
+    timing: "attack-clash",
+    cardTypes: ["attack"],
+    description: "若对方同槽位也是攻击，则本次攻击强度 +1。",
+  },
+  {
+    key: "recycle",
+    label: "回收",
+    timing: "post-resolve",
+    cardTypes: ["defend"],
+    description: "若对方同槽位不是攻击，则额外获得 1 点能量。",
+  },
+  {
+    key: "insight",
+    label: "洞察",
+    timing: "on-place",
+    cardTypes: ["charge"],
+    description: "布置后立即揭示 1 张敌方已布置的暗牌。",
+  },
+];
+
+window.BBC_KEYWORD_MAP = Object.fromEntries(
+  window.BBC_KEYWORD_REGISTRY.map((keyword) => [keyword.key, keyword]),
+);
